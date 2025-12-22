@@ -95,3 +95,67 @@ def determine_topology(V, R, P):
 
     # Если ни один из типов не подошёл
     return "неизвестная топология"
+
+
+def input_graph():
+    """
+    Функция для ввода данных о графе от пользователя
+    """
+    print("=" * 50)
+    print("ВВОД ДАННЫХ О СЕТЕВОЙ ТОПОЛОГИИ")
+    print("=" * 50)
+
+    # Ввод количества вершин
+    while True:
+        try:
+            V = int(input("Введите количество вершин (V > 4): "))
+            if V > 4:
+                break
+            else:
+                print("Ошибка: количество вершин должно быть больше 4!")
+        except ValueError:
+            print("Ошибка: введите целое число!")
+
+    # Ввод количества рёбер
+    while True:
+        try:
+            R = int(input(f"Введите количество рёбер (R > 3): "))
+            if R > 3:
+                break
+            else:
+                print("Ошибка: количество рёбер должно быть больше 3!")
+        except ValueError:
+            print("Ошибка: введите целое число!")
+
+    # Ввод рёбер
+    P = []
+    print(f"\nВведите {R} рёбер в формате 'i j' (например: 1 2)")
+    print(f"Номера вершин должны быть от 1 до {V}")
+    print("Пример ввода для одного ребра: 1 3")
+
+    for edge_num in range(1, R + 1):
+        while True:
+            try:
+                edge_input = input(f"Ребро {edge_num} из {R}: ")
+                parts = edge_input.split()
+
+                if len(parts) != 2:
+                    print("Ошибка: нужно ввести ровно два числа через пробел!")
+                    continue
+
+                i, j = int(parts[0]), int(parts[1])
+
+                # Проверка корректности номеров вершин
+                if 1 <= i <= V and 1 <= j <= V:
+                    if i != j:
+                        P.append((i, j))
+                        break
+                    else:
+                        print("Ошибка: вершины не могут быть одинаковыми!")
+                else:
+                    print(f"Ошибка: номера вершин должны быть от 1 до {V}!")
+
+            except ValueError:
+                print("Ошибка: введите два целых числа через пробел!")
+
+    return V, R, P

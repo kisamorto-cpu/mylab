@@ -1,0 +1,101 @@
+@startuml
+title Диаграмма классов системы "Продукты"
+
+class Product {
+    -name: String
+    -price: double
+    +Product()
+    +Product(name: String, price: double)
+    +getName(): String
+    +setName(name: String): void
+    +getPrice(): double
+    +setPrice(price: double): void
+    +equals(obj: Object): boolean
+    +hashCode(): int
+    +toString(): String
+}
+
+class Fruit {
+    -origin: String
+    -weight: double
+    +Fruit()
+    +Fruit(name: String, price: double, origin: String, weight: double)
+    +getOrigin(): String
+    +setOrigin(origin: String): void
+    +getWeight(): double
+    +setWeight(weight: double): void
+    +equals(obj: Object): boolean
+    +hashCode(): int
+    +toString(): String
+}
+
+class DairyProduct {
+    -fatContent: int
+    -expirationDate: String
+    +DairyProduct()
+    +DairyProduct(name: String, price: double, fatContent: int, expirationDate: String)
+    +getFatContent(): int
+    +setFatContent(fatContent: int): void
+    +getExpirationDate(): String
+    +setExpirationDate(expirationDate: String): void
+    +equals(obj: Object): boolean
+    +hashCode(): int
+    +toString(): String
+}
+
+class Meat {
+    -type: String
+    -weight: double
+    +Meat()
+    +Meat(name: String, price: double, type: String, weight: double)
+    +getType(): String
+    +setType(type: String): void
+    +getWeight(): double
+    +setWeight(weight: double): void
+    +equals(obj: Object): boolean
+    +hashCode(): int
+    +toString(): String
+}
+
+class ProductApp {
+    -products: List<Product>
+    -scanner: Scanner
+    +main(args: String[]): void
+    -printMenu(): void
+    -addProduct(): void
+    -deleteProduct(): void
+    -displayAllProducts(): void
+    -compareProducts(): void
+    -getIntInput(prompt: String): int
+    -getIntInput(prompt: String, min: int, max: int): int
+    -getDoubleInput(prompt: String, min: double, max: double): double
+    -getStringInput(prompt: String): String
+}
+
+Product <|-- Fruit
+Product <|-- DairyProduct
+Product <|-- Meat
+
+ProductApp ..> Product : использует
+
+note top of Product
+    Базовый класс для всех продуктов
+    Содержит название и цену
+end note
+
+note right of Fruit
+    Фрукты имеют страну происхождения
+    и вес в килограммах
+end note
+
+note right of DairyProduct
+    Молочная продукция имеет
+    процент жирности и срок годности
+end note
+
+note right of Meat
+    Мясо имеет вид (говядина, свинина)
+    и вес в килограммах
+end note
+
+@enduml
